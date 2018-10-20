@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       dishes: DISHES
     };
+    
   }
 
   render() {
@@ -24,6 +25,8 @@ class App extends Component {
           </div>
         </Navbar>
         <Menu dishes={this.state.dishes} />
+
+        
 
       </div>
       
