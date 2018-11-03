@@ -154,7 +154,7 @@ class CommentForm extends Component{
                         <div className="col-12">
                         <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
                             <Row className="form-group">
-                                <Label htmlFor="lastname" md={2}><strong>Rating</strong></Label>
+                                <Label htmlFor="rating" md={2}><strong>Rating</strong></Label>
                                 <Col md={{size: 12}}>
                                     <Control.select model=".rating" name="rating"
                                         className="form-control">
