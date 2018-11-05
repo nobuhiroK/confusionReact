@@ -4,6 +4,7 @@ import { Card, CardImg, CardText, CardBody,
     Form, FormGroup, Input, Label, Row, Col } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
 
 
 
@@ -53,10 +54,9 @@ import { Link } from 'react-router-dom';
 
     function RenderDish({dish}){
        // var str = JSON.stringify(dish, null, 2); // spacing level = 2
-        console.log(dish)
-        if (dish) {
-
-            return(
+        //console.log(dish)
+        if (dish){
+        return(
                 // <div  className="col-12 col-md-5 m-1">
                     <Card>
                         <CardImg top src={dish.image} alt={dish.name} />
@@ -68,44 +68,63 @@ import { Link } from 'react-router-dom';
                 // </div>
                     );
 
-                } else{
+        }else{
 
-                    return(
+            return(
 
-                        <div></div>
+                <div></div>
 
-                        );
+                );
 
-                    }
+            }
 
     }
     const  DishDetail = (props) => {
-        
-        return (
+        if (props.isLoading) {
+            return(
                 <div className="container">
-                    <div className="row">
-                        <Breadcrumb>
-
-                            <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                            <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
-                        </Breadcrumb>
-                        <div className="col-12">
-                            <h3>{props.dish.name}</h3>
-                            <hr />
-                        </div>                
-                    </div>
-                    <div className="row">
-                        <div className="col-12 col-md-5 m-1">
-                            <RenderDish dish={props.dish} />
-                        </div>
-                        <div className="col-12 col-md-5 m-1">
-                            <RenderComments comments={props.comments} 
-                            addComment={props.addComment} 
-                            dishId={props.dish.id}/>
-                        </div>
+                    <div className="row">            
+                        <Loading />
                     </div>
                 </div>
             );
+        }
+        else if (props.errMess) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <h4>{props.errMess}</h4>
+                    </div>
+                </div>
+            );
+        }
+        else if (props.dish != null) {
+            return (
+                    <div className="container">
+                        <div className="row">
+                            <Breadcrumb>
+
+                                <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                                <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                            </Breadcrumb>
+                            <div className="col-12">
+                                <h3>{props.dish.name}</h3>
+                                <hr />
+                            </div>                
+                        </div>
+                        <div className="row">
+                            <div className="col-12 col-md-5 m-1">
+                                <RenderDish dish={props.dish} />
+                            </div>
+                            <div className="col-12 col-md-5 m-1">
+                                <RenderComments comments={props.comments} 
+                                addComment={props.addComment} 
+                                dishId={props.dish.id}/>
+                            </div>
+                        </div>
+                    </div>
+                );
+    }
             
     }
 
@@ -172,7 +191,7 @@ class CommentForm extends Component{
                             <Row className="form-group">
                                 <Label htmlFor="yourname" md={4}><strong>Your Name</strong></Label>
                                 <Col md={{size: 12}}>
-                                    <Control.text model=".yourname" id="yourname" name="yourname"
+                                    <Control.text model=".author" id="author" name="author"
                                         placeholder="Your Name"
                                         className="form-control"
                                         validators={{
@@ -195,7 +214,7 @@ class CommentForm extends Component{
                                 <Label htmlFor="comment" md={4}><strong>Comment</strong></Label>
                                 <Col md={12}>
                                     <Control.textarea model=".comment" id="comment" name="comment"
-                                        rows="12"
+                                        rows="6"
                                         className="form-control" />
                                 </Col>
                             </Row>
