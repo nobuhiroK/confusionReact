@@ -20,14 +20,12 @@ const mapStateToProps = state => {
   }
 };
 const mapDispatchToProps = dispatch => ({
-  
-    addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
-    fetchDishes: () => { dispatch(fetchDishes())},
-    resetFeedbackForm: () => { dispatch(actions.reset('feedback'))},
-    fetchComments: () => dispatch(fetchComments()),
-    fetchPromos: () => dispatch(fetchPromos())
-  
-  });
+  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
+  fetchDishes: () => { dispatch(fetchDishes())},
+  resetFeedbackForm: () => { dispatch(actions.reset('feedback'))},
+  fetchComments: () => dispatch(fetchComments()),
+  fetchPromos: () => dispatch(fetchPromos())
+});
 
 
 class Main extends Component {
@@ -41,6 +39,7 @@ class Main extends Component {
     this.props.fetchComments();
     this.props.fetchPromos();
   }
+  
 
   
   render() {

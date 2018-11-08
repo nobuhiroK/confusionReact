@@ -19,7 +19,7 @@ function RenderCard({item, isLoading, errMess}) {
 	    return(
 	    	
 	        <Card>
-	            <CardImg src={baseUrl +item.image} alt={item.name} />
+	            <CardImg src={baseUrl + item.image} alt={item.name} />
 	            <CardBody>
 	            <CardTitle>{item.name}</CardTitle>
 	            {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
@@ -35,9 +35,9 @@ function Home(props) {
         <div className="container">
             <div className="row align-items-start">
                 <div className="col-12 col-md m-1">
-                    <RenderCard item={props.dish} isLoading={props.dishesLoading} errMess={props.dishesErrMess} />
-                </div>
-                <div className="col-12 col-md m-1">
+                    <RenderCard item={props.dish} isLoading={props.dishesLoading} errMess={props.dishErrMess}  />
+                </div>																			
+                <div className="col-12 col-md m-1">												
                      <RenderCard item={props.promotion} isLoading={props.promoLoading} errMess={props.promoErrMess} />
                 </div>
                 <div className="col-12 col-md m-1">
